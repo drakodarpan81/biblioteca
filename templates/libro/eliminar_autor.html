@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Eliminación de autores
+{% endblock title %}
+
+{% block body %}
+    <h2>¿Desea eliminar al usuario {{ autor.nombre }} {{ autor.apellidos }}?</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit">Eliminar</button>
+        <a href=" {% url 'libro:listar_autor' %} ">Cancelar</a>
+    </form>
+{% endblock body %}

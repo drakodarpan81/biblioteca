@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+  Lista de autores
+{% endblock title %}
+
+{% block body %}
+    {% if autores %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Nacionalidad</th>
+                    <th>Descripción</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in autores %}
+                    <tr>
+                        <td> {{a.id}} </td>
+                        <td> {{a.nombre}} </td>
+                        <td> {{a.apellidos}} </td>
+                        <td> {{a.nacionalidad}} </td>
+                        <td> {{a.descripcion}} </td>
+                        <td> 
+                            <a href=" {% url 'libro:editar_autor' a.id %} ">Editar</a> 
+                            <a href=" {% url 'libro:eliminar_autor' a.id %} ">Eliminar</a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>
+            No existen autores registrados
+        </h1>
+    {% endif %}
+{% endblock body %}
