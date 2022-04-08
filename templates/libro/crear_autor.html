@@ -10,7 +10,9 @@
         {% csrf_token %}
 
         {% if error %}
-            <h2> {{error}} </h2>        
+            <h2>
+                {{ error }}
+            </h2>
         {% else %}
             {{ autor_form.as_p }}
             <button type="submit">Crear</button>

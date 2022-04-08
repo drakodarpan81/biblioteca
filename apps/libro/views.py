@@ -4,24 +4,32 @@ from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
+
+
 def Home(request):
     return render(request, 'index.html')
+
 
 def crearAutor(request):
     if request.method == 'POST':
         autor_form = AutorForm(request.POST)
         if autor_form.is_valid():
+            nom = autor_form.cleaned_data['nombre']
+            print(nom)
+
             autor_form.save()
             return render(request, 'index.html')
     else:
         autor_form = AutorForm()
-    
-    return render(request, 'libro/crear_autor.html', {'autor_form' : autor_form})
+
+    return render(request, 'libro/crear_autor.html', {'autor_form': autor_form})
+
 
 def listarAutor(request):
     autores = Autor.objects.filter(estado=True)
 
-    return render(request, 'libro/listar_autor.html', {'autores':autores})
+    return render(request, 'libro/listar_autor.html', {'autores': autores})
+
 
 def editarAutor(request, id):
 
@@ -33,7 +41,7 @@ def editarAutor(request, id):
         autor = Autor.objects.get(id=id)
 
         if request.method == 'GET':
-            autor_form = AutorForm(instance = autor)
+            autor_form = AutorForm(instance=autor)
         else:
             autor_form = AutorForm(request.POST, instance=autor)
             if autor_form.is_valid():
@@ -43,7 +51,8 @@ def editarAutor(request, id):
     except ObjectDoesNotExist as e:
         error = e
 
-    return render(request, 'libro/crear_autor.html', {'autor_form':autor_form, 'error':error})
+    return render(request, 'libro/crear_autor.html', {'autor_form': autor_form, 'error': error})
+
 
 def eliminarAutor(request, id):
     autor = Autor.objects.get(id=id)
@@ -52,5 +61,5 @@ def eliminarAutor(request, id):
         autor.estado = False
         autor.save()
         return redirect('libro:listar_autor')
-    
-    return render(request, 'libro/eliminar_autor.html', {'autor':autor})
+
+    return render(request, 'libro/eliminar_autor.html', {'autor': autor})
