@@ -2,41 +2,60 @@
 {% load static %}
 
 {% block title %}
-  Lista de autores
+    Lista de autores
 {% endblock title %}
 
 {% block body %}
     {% if autores %}
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Nacionalidad</th>
-                    <th>Descripción</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for a in autores %}
-                    <tr>
-                        <td> {{a.id}} </td>
-                        <td> {{a.nombre}} </td>
-                        <td> {{a.apellidos}} </td>
-                        <td> {{a.nacionalidad}} </td>
-                        <td> {{a.descripcion}} </td>
-                        <td> 
-                            <a href=" {% url 'libro:editar_autor' a.id %} ">Editar</a> 
-                            <a href=" {% url 'libro:eliminar_autor' a.id %} ">Eliminar</a> 
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Table with stripped rows</h5>
+
+                <!-- Table with stripped rows -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Nacionalidad</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Opción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in autores %}
+                            <tr>
+                                <td>
+                                    {{a.id}}
+                                </td>
+                                <td>
+                                    {{a.nombre}}
+                                </td>
+                                <td>
+                                    {{a.apellidos}}
+                                </td>
+                                <td>
+                                    {{a.nacionalidad}}
+                                </td>
+                                <td>
+                                    {{a.descripcion}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" href="{% url 'libro:editar_autor' a.id %}">Editar</a>
+                                    <a class="btn btn-outline-danger" href="{% url 'libro:eliminar_autor' a.id %}">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+
+            </div>
+        </div>
     {% else %}
         <h1>
             No existen autores registrados
         </h1>
     {% endif %}
-{% endblock body %}
+{% endblock body %}</td></tr></td></tr></td></tr></td></tr></td> </tr>

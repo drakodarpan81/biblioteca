@@ -6,16 +6,31 @@
 {% endblock title %}
 
 {% block body %}
-    <form method="POST">
-        {% csrf_token %}
 
-        {% if error %}
-            <h2>
-                {{ error }}
-            </h2>
-        {% else %}
-            {{ autor_form.as_p }}
-            <button type="submit">Crear</button>
-        {% endif %}
-    </form>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Multi Columns Form</h5>
+
+            <!-- Multi Columns Form -->
+            <form class="row g-3" method="POST">
+                {% csrf_token %}
+
+                {% if error %}
+                    <h2>
+                        {{ error }}
+                    </h2>
+                {% else %}
+                    {{ autor_form.as_p }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                {% endif %}
+
+            </form>
+            <!-- End Multi Columns Form -->
+
+        </div>
+    </div>
+
 {% endblock body %}
