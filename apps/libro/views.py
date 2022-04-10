@@ -2,24 +2,17 @@ from django.shortcuts import render, redirect
 from .forms import AutorForm
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
-from django.views.generic import View,TemplateView
+from django.views.generic import TemplateView, ListView
 # Create your views here.
-
-"""
-    dispatch => Valida la petición y elige que methodo HTTP se utilizo en la solicitud
-    http_method_not_allowed => Error cuando se utiliza un método HTTP no soportado
-
-
-class InicioView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
-
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-"""
 
 class InicioView(TemplateView):
     template_name = "index.html"
+
+class AutorListView(ListView):
+    model = Autor
+    template_name = "libro/listar_autor.html"
+    context_object_name='autores'
+    queryset = Autor.objects.filter(estado=True)
 
 
 def crearAutor(request):
@@ -35,12 +28,6 @@ def crearAutor(request):
         autor_form = AutorForm()
 
     return render(request, 'libro/crear_autor.html', {'autor_form': autor_form})
-
-
-def listarAutor(request):
-    autores = Autor.objects.filter(estado=True)
-
-    return render(request, 'libro/listar_autor.html', {'autores': autores})
 
 
 def editarAutor(request, id):

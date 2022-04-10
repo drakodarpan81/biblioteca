@@ -12,7 +12,7 @@
             <h5 class="card-title">Multi Columns Form</h5>
 
             <!-- Multi Columns Form -->
-            <form class="row g-3" method="POST">
+            <form method="POST" action="#">
                 {% csrf_token %}
 
                 {% if error %}
@@ -20,10 +20,31 @@
                         {{ error }}
                     </h2>
                 {% else %}
-                    {{ autor_form.as_p }}
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Crear</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    <div class="row form-group">
+                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Nombre</label> </div>
+                        <div class="col-12 col-md-9"><input type="text" name="nombres" class="form-control" placeholder="Ingrese el nombre del autor"></div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Apellidos</label> </div>
+                        <div class="col-12 col-md-9"><input type="text" name="apellidos" class="form-control" placeholder="Ingrese los apellidos del autor"></div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Nacionalidad</label> </div>
+                        <div class="col-12 col-md-9"><input type="text" name="nacionalidad" class="form-control" placeholder="Ingrese la nacionalidad del autor"></div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Descripción</label> </div>
+                        <div class="col-12 col-md-9"><textarea name="descripcion" class="form-control" placeholder="Ingrese la descripción del autor" col="200" rows="10"></textarea></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Crear</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
                     </div>
                 {% endif %}
 
