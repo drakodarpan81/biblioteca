@@ -10,7 +10,7 @@
     <form method="POST">
         {% csrf_token %}
 
-        <button type="submit">Eliminar</button>
-        <a href=" {% url 'libro:listar_autor' %} ">Cancelar</a>
+        <button type="submit" class="btn btn-outline-success">Eliminar</button>
+        <a class="btn btn-outline-danger" href=" {% url 'libro:listar_autor' %} ">Cancelar</a>
     </form>
 {% endblock body %}

@@ -9,10 +9,10 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Multi Columns Form</h5>
+            <h5 class="card-title">Encabezado</h5>
 
             <!-- Multi Columns Form -->
-            <form method="POST" action="#">
+            <form method="POST" action="#" enctype="multipart/form-data" class="form-horizontal">
                 {% csrf_token %}
 
                 {% if error %}
@@ -21,23 +21,23 @@
                     </h2>
                 {% else %}
                     <div class="row form-group">
-                        <div class="col col-md-3"> {{ autor_form.nombre.label }} </div>
-                        <div class="col-12 col-md-9"> {{ autor_form.nombre }} </div>
+                        <div class="col col-md-3"> {{ form.nombre.label }} </div>
+                        <div class="col-12 col-md-9"> {{ form.nombre }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> {{ autor_form.apellidos.label }} </div>
-                        <div class="col-12 col-md-9"> {{ autor_form.apellidos }} </div>
+                        <div class="col col-md-3"> {{ form.apellidos.label }} </div>
+                        <div class="col-12 col-md-9"> {{ form.apellidos }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> {{ autor_form.nacionalidad.label }} </div>
-                        <div class="col-12 col-md-9"> {{ autor_form.nacionalidad }} </div>
+                        <div class="col col-md-3"> {{ form.nacionalidad.label }} </div>
+                        <div class="col-12 col-md-9"> {{ form.nacionalidad }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> {{ autor_form.descripcion.label }} </div>
-                        <div class="col-12 col-md-9"> {{ autor_form.descripcion }} </div>
+                        <div class="col col-md-3"> {{ form.descripcion.label }} </div>
+                        <div class="col-12 col-md-9"> {{ form.descripcion }} </div>
                     </div>
 
                     <div class="row">
