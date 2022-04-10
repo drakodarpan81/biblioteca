@@ -21,23 +21,23 @@
                     </h2>
                 {% else %}
                     <div class="row form-group">
-                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Nombre</label> </div>
-                        <div class="col-12 col-md-9"><input type="text" name="nombres" class="form-control" placeholder="Ingrese el nombre del autor"></div>
+                        <div class="col col-md-3"> {{ autor_form.nombre.label }} </div>
+                        <div class="col-12 col-md-9"> {{ autor_form.nombre }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Apellidos</label> </div>
-                        <div class="col-12 col-md-9"><input type="text" name="apellidos" class="form-control" placeholder="Ingrese los apellidos del autor"></div>
+                        <div class="col col-md-3"> {{ autor_form.apellidos.label }} </div>
+                        <div class="col-12 col-md-9"> {{ autor_form.apellidos }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Nacionalidad</label> </div>
-                        <div class="col-12 col-md-9"><input type="text" name="nacionalidad" class="form-control" placeholder="Ingrese la nacionalidad del autor"></div>
+                        <div class="col col-md-3"> {{ autor_form.nacionalidad.label }} </div>
+                        <div class="col-12 col-md-9"> {{ autor_form.nacionalidad }} </div>
                     </div>
 
                     <div class="row form-group">
-                        <div class="col col-md-3"> <label for="text-input" class="form-control-label">Descripción</label> </div>
-                        <div class="col-12 col-md-9"><textarea name="descripcion" class="form-control" placeholder="Ingrese la descripción del autor" col="200" rows="10"></textarea></div>
+                        <div class="col col-md-3"> {{ autor_form.descripcion.label }} </div>
+                        <div class="col-12 col-md-9"> {{ autor_form.descripcion }} </div>
                     </div>
 
                     <div class="row">
