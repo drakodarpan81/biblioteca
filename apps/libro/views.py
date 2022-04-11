@@ -4,33 +4,36 @@ from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class InicioView(TemplateView):
+
+class InicioView(LoginRequiredMixin, TemplateView):
     template_name = "index.html"
 
-class AutorListView(ListView):
+
+class AutorListView(LoginRequiredMixin, ListView):
     model = Autor
     template_name = "libro/listar_autor.html"
-    context_object_name='autores'
+    context_object_name = 'autores'
     queryset = Autor.objects.filter(estado=True)
 
 
-class AutorUpdateView(UpdateView):
+class AutorUpdateView(LoginRequiredMixin, UpdateView):
     model = Autor
     template_name = "libro/crear_autor.html"
     form_class = AutorForm
     success_url = reverse_lazy('libro:listar_autor')
 
 
-class AutorCreateView(CreateView):
+class AutorCreateView(LoginRequiredMixin, CreateView):
     model = Autor
     template_name = 'libro/crear_autor.html'
     form_class = AutorForm
     success_url = reverse_lazy('libro:listar_autor')
 
 
-class AutorDeleteView(DeleteView):
+class AutorDeleteView(LoginRequiredMixin, DeleteView):
     model = Autor
     template_name = 'libro/eliminar_autor.html'
 
@@ -39,14 +42,3 @@ class AutorDeleteView(DeleteView):
         object.estado = False
         object.save()
         return redirect('libro:listar_autor')
-
-
-def eliminarAutor(request, id):
-    autor = Autor.objects.get(id=id)
-
-    if request.method == 'POST':
-        autor.estado = False
-        autor.save()
-        return redirect('libro:listar_autor')
-
-    return render(request, 'libro/eliminar_autor.html', {'autor': autor})
