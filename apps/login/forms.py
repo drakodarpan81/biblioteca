@@ -1,4 +1,7 @@
+from django.forms import *
 from django.contrib.auth.forms import AuthenticationForm
+from apps.libro.models import Autor
+from apps.libro.models import *
 
 
 class FormularioLogin(AuthenticationForm):

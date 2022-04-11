@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('libro/', include(('apps.libro.urls', 'libro'))),
     path('inicio/', InicioView.as_view(), name='index'),
-    path('', login_request, name='login'),
+    path('', Login.as_view(), name='login'),
     path('logout/', logout_request, name='logout')
 ]

@@ -40,11 +40,11 @@
         href="{% static 'biblioteca/assets/css/style.css' %}" rel="stylesheet">
 
     <!-- =======================================================
-          * Template Name: NiceAdmin - v2.2.2
-          * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-          * Author: BootstrapMade.com
-          * License: https://bootstrapmade.com/license/
-          ======================================================== -->
+                          * Template Name: NiceAdmin - v2.2.2
+                          * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+                          * Author: BootstrapMade.com
+                          * License: https://bootstrapmade.com/license/
+                          ======================================================== -->
     </head>
 
     <body>
@@ -86,17 +86,31 @@
                                             {% csrf_token %}
 
                                             <div class="col-12">
+
+                                                {% if form.error_messages %}
+                                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <strong>Advertencia</strong>
+                                                        {{ form.get_invalid_login_error }}
+                                                    </div>
+                                                {% endif %}
+
+                                            </div>
+
+                                            <div class="col-12">
                                                 <label for="yourUsername" class="form-label">Username</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="text" name="username" id="yourUsername" required>
+                                                    {{ form.username }}
                                                     <div class="invalid-feedback">Please enter your username.</div>
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="yourPassword" class="form-label">Password</label>
-                                                <input type="password" name="password" id="yourPassword" required>
+                                                {{ form.password }}
                                                 <div class="invalid-feedback">Please enter your password!</div>
                                             </div>
 
@@ -123,7 +137,8 @@
                                     <!-- All the links in the footer should remain intact. -->
                                     <!-- You can delete the links only if you purchased the pro version. -->
                                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->Designed by
+                                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                                    Designed by
                                         <a href="https://bootstrapmade.com/"> BootstrapMade</a>
                                 </div>
 
