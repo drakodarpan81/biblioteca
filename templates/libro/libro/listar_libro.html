@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Lista de autores
+{% endblock title %}
+
+{% block body %}
+    {% if libros %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Listado de libros</h5>
+
+                <!-- Table with stripped rows -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Fecha de publicación</th>
+                            <th scope="col">Opción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for l in libros %}
+                            <tr>
+                                <td>
+                                    {{ l.id }}
+                                </td>
+                                <td>
+                                    {{ l.titulo }}
+                                </td>
+                                <td>
+                                    {% for autor in l.autor_id.all %}
+                                        <li>{{ autor.nombre }}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {{ l.fecha_publicacion }}
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" href="#">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        Editar</a>
+                                    <a class="btn btn-outline-danger" href="#">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+
+            </div>
+        </div>
+    {% else %}
+        <h1>
+            No existen libros registrados
+        </h1>
+    {% endif %}
+{% endblock body %}</td></tr></td></tr></td></tr></td></tr></td> </tr>

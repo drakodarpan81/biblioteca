@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Creación de libros
+{% endblock title %}
+
+{% block DateTimePickerHeader %}
+    <script src="{% static 'lib/jquery/jquery-3.6.0.min.js' %}"></script>
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="{% static 'lib/datetimepicker/jquery.datetimepicker.min.css' %}">
+        <script src="{% static 'lib/datetimepicker/jquery.datetimepicker.full.min.js' %}"></script>
+    {% endblock DateTimePickerHeader %}
+
+    {% block body %}
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Encabezado</h5>
+
+                <!-- Multi Columns Form -->
+                <form method="POST" action="#" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="row">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Crear</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </div>
+
+                </form>
+                <!-- End Multi Columns Form -->
+
+            </div>
+        </div>
+
+    {% endblock body %}
+
+    {% block DateTimePickerJS %}
+        <script>
+            $(document).ready(function () {
+                jQuery.datetimepicker.setLocale('es');
+            });
+            $(function () {
+                $("#id_fecha_publicacion").datetimepicker({format: 'd/m/Y H:i'});
+            });
+        </script>
+    {% endblock DateTimePickerJS %}

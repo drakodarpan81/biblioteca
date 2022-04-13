@@ -39,12 +39,15 @@
         <link
         href="{% static 'biblioteca/assets/css/style.css' %}" rel="stylesheet">
 
-    <!-- =======================================================
-                                                                                                        * Template Name: NiceAdmin - v2.2.2
-                                                                                                        * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-                                                                                                        * Author: BootstrapMade.com
-                                                                                                        * License: https://bootstrapmade.com/license/
-                                                                                                        ======================================================== -->
+        <!-- DateTimePicker -->
+        {% block DateTimePickerHeader %}{% endblock DateTimePickerHeader %}
+
+        <!-- =======================================================
+                                            * Template Name: NiceAdmin - v2.2.2
+                                            * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+                                            * Author: BootstrapMade.com
+                                            * License: https://bootstrapmade.com/license/
+                                            ======================================================== -->
     </head>
 
     <body>
@@ -191,15 +194,15 @@
 
                     <ul id="components-nav-libros" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="components-alerts.html">
+                            <a href="{% url 'libro:crear_libro' %}">
                                 <i class="bi bi-circle"></i>
-                                <span>Alerts</span>
+                                <span>Registrar Libro</span>
                             </a>
                         </li>
                         <li>
-                            <a href="components-accordion.html">
+                            <a href="{% url 'libro:listado_libros' %}">
                                 <i class="bi bi-circle"></i>
-                                <span>Accordion</span>
+                                <span>Listar libros</span>
                             </a>
                         </li>
                     </ul>
@@ -291,6 +294,8 @@
         <!-- Template Main JS File -->
         <script src="{% static 'biblioteca/assets/js/main.js' %}"></script>
 
+        <!-- JS DateTimePicker -->
+        {% block DateTimePickerJS %}{% endblock DateTimePickerJS %}
     </body>
 
 </html>

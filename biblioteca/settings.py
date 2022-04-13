@@ -45,7 +45,9 @@ LOCAL_APPS = [
     'apps.login',
 ]
 
-EXTERNAL_APP = []
+EXTERNAL_APP = [
+
+]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + EXTERNAL_APP
 
