@@ -47,14 +47,31 @@ class LibroListView(LoginRequiredMixin, ListView):
     model = Libro
     template_name = "libro/libro/listar_libro.html"
     context_object_name = 'libros'
+    queryset = Libro.objects.filter(estado=True)
+    context_object_name = 'libros'
 
 
-class LibroCreateView(CreateView):
+class LibroCreateView(LoginRequiredMixin, CreateView):
     model = Libro
     form_class = LibroForm
     template_name = "libro/libro/crear_libro.html"
     success_url = reverse_lazy('libro:listado_libros')
 
-    def post(self, request, *args, **kwargs):
-        print(request.POST)
-        return super().post(request, *args, **kwargs)
+
+class LibroUpdateView(LoginRequiredMixin, UpdateView):
+    model = Libro
+    template_name = "libro/libro/crear_libro.html"
+    success_url = reverse_lazy('libro:listado_libros')
+    form_class = LibroForm
+
+
+class LibroDeleteView(LoginRequiredMixin, DeleteView):
+    model = Libro
+    template_name = "libro/libro/eliminar_libro.html"
+    success_url = reverse_lazy('libro:listado_libro')
+
+    def post(self, request, pk, *args, **kwargs):
+        object = Libro.objects.get(id=pk)
+        object.estado = False
+        object.save()
+        return redirect('libro:listado_libros')

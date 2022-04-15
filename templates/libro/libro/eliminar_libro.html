@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Eliminación de autores
+{% endblock title %}
+
+{% block body %}
+    <h2>¿Desea eliminar el libro:
+        {{ libro.titulo }},
+                del autor:
+        {% for autor in libro.autor_id.all %}
+            <li>{{ autor.nombre }}</li>
+        {% endfor %}
+        ?</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-outline-success">Eliminar</button>
+        <a class="btn btn-outline-danger" href=" {% url 'libro:listado_libros' %} ">Cancelar</a>
+    </form>
+{% endblock body %}
