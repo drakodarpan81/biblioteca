@@ -43,6 +43,7 @@ BASE_APPS = [
 LOCAL_APPS = [
     'apps.libro',
     'apps.login',
+    'apps.usuario',
 ]
 
 EXTERNAL_APP = [
@@ -145,3 +146,5 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = reverse_lazy('login')
+
+AUTH_USER_MODEL = 'usuario.Usuario'

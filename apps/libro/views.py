@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,8 +15,20 @@ class AutorListView(LoginRequiredMixin, ListView):
     model = Autor
     template_name = "libro/autor/listar_autor.html"
     context_object_name = 'autores'
-    queryset = Autor.objects.filter(estado=True)
+    form_class = AutorForm
 
+    def get_queryset(self):
+        return self.model.objects.filter(estado=True)
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        context["autores"] = self.get_queryset()
+        context["form"] = self.form_class
+        return context
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+        
 
 class AutorUpdateView(LoginRequiredMixin, UpdateView):
     model = Autor
