@@ -8,8 +8,16 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+
 from django.views.generic.edit import FormView
+
+from apps.usuario.models import Usuario
 from .forms import FormularioLogin
+from apps.usuario.forms import FormularioUsuario
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -55,3 +63,19 @@ def login_request(request):
 
     form = AuthenticationForm()
     return render(request=request, template_name='login.html', context={"login_form": form})
+
+
+class UsuarioListView(LoginRequiredMixin, ListView):
+    model = Usuario
+    template_name = "usuarios/listar_usuarios.html"
+    context_object_name = 'usuarios'
+
+    def get_queryset(self):
+        return self.model.objects.filter(usuario_activo=True)
+
+
+class RegistrarUsuario(LoginRequiredMixin, CreateView):
+    model = Usuario
+    form_class = FormularioUsuario
+    template_name = 'usuarios/crear_usuario.html'
+    success_url = reverse_lazy('usuarios:listar_usuarios')

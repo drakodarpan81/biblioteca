@@ -2,48 +2,46 @@
 {% load static %}
 
 {% block title %}
-    Lista de autores
+    Lista de usuarios
 {% endblock title %}
 
 {% block body %}
-    {% if libros %}
+    {% if usuarios %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Listado de libros</h5>
+                <h5 class="card-title">Listado de usuarios</h5>
 
                 <!-- Table with stripped rows -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Fecha de publicación</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
                             <th scope="col">Opción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for l in libros %}
+                        {% for u in usuarios %}
                             <tr>
                                 <td>
-                                    {{ l.id }}
+                                    {{ u.id }}
                                 </td>
                                 <td>
-                                    {{ l.titulo }}
+                                    {{ u.username }}
                                 </td>
                                 <td>
-                                    {% for autor in l.autor_id.all %}
-                                        <li>{{ autor.nombre }}</li>
-                                    {% endfor %}
+                                    {{ u.nombres }}</li>
                                 </td>
                                 <td>
-                                    {{ l.fecha_publicacion }}
+                                    {{ u.apellidos }}
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-success" href="{% url 'libro:editar_libro' l.id %}">
+                                    <a class="btn btn-outline-success" href="">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         Editar</a>
-                                    <a class="btn btn-outline-danger" href="{% url 'libro:eliminar_libro' l.id %}">
+                                    <a class="btn btn-outline-danger" href="">
                                         <i class="fa-solid fa-trash-can"></i>
                                         Eliminar</a>
                                 </td>
@@ -57,7 +55,7 @@
         </div>
     {% else %}
         <h1>
-            No existen libros registrados
+            No existen usuarios registrados
         </h1>
     {% endif %}
 {% endblock body %}

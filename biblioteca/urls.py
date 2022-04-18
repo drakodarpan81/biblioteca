@@ -23,5 +23,8 @@ urlpatterns = [
     path('libro/', include(('apps.libro.urls', 'libro'))),
     path('inicio/', InicioView.as_view(), name='index'),
     path('', Login.as_view(), name='login'),
-    path('logout/', logout_request, name='logout')
+    path('logout/', logout_request, name='logout'),
+
+    # Usuarios
+    path('usuarios/', include(('apps.login.urls', 'usuarios')))
 ]

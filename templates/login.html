@@ -40,11 +40,11 @@
         href="{% static 'biblioteca/assets/css/style.css' %}" rel="stylesheet">
 
     <!-- =======================================================
-                          * Template Name: NiceAdmin - v2.2.2
-                          * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-                          * Author: BootstrapMade.com
-                          * License: https://bootstrapmade.com/license/
-                          ======================================================== -->
+                              * Template Name: NiceAdmin - v2.2.2
+                              * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+                              * Author: BootstrapMade.com
+                              * License: https://bootstrapmade.com/license/
+                              ======================================================== -->
     </head>
 
     <body>
@@ -88,12 +88,10 @@
                                             <div class="col-12">
 
                                                 {% if form.error_messages %}
-                                                    <div class="alert alert-danger alert-dismissible" role="alert">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
                                                         <strong>Advertencia</strong>
                                                         {{ form.get_invalid_login_error }}
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                     </div>
                                                 {% endif %}
 

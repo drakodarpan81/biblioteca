@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Creación de usuarios
+{% endblock title %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Encabezado</h5>
+
+            <!-- Multi Columns Form -->
+            <form method="POST" action="#" enctype="multipart/form-data" class="form-horizontal">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <div class="row">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <a href="{% url 'usuarios:listar_usuarios' %}" type="button" class="btn btn-outline-danger">Cancelar</a>
+                    </div>
+                </div>
+
+            </form>
+            <!-- End Multi Columns Form -->
+
+        </div>
+    </div>
+
+{% endblock body %}

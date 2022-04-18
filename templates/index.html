@@ -43,11 +43,11 @@
         {% block DateTimePickerHeader %}{% endblock DateTimePickerHeader %}
 
         <!-- =======================================================
-                                            * Template Name: NiceAdmin - v2.2.2
-                                            * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-                                            * Author: BootstrapMade.com
-                                            * License: https://bootstrapmade.com/license/
-                                            ======================================================== -->
+                                                    * Template Name: NiceAdmin - v2.2.2
+                                                    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+                                                    * Author: BootstrapMade.com
+                                                    * License: https://bootstrapmade.com/license/
+                                                    ======================================================== -->
     </head>
 
     <body>
@@ -166,6 +166,28 @@
                 <!-- End Dashboard Nav -->
 
                 <li class="nav-item">
+                    {% if request.user.is_staff %}
+                        <a class="nav-link collapsed" data-bs-target="#components-nav-usuarios" data-bs-toggle="collapse" href="#">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Usuarios</span>
+                            <i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul id="components-nav-usuarios" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                            <li>
+                                <a href="{% url 'usuarios:listar_usuarios' %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <span>Listado de usuarios</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'usuarios:registrar_usuarios' %}">
+                                    <i class="fa-solid fa-list"></i>
+                                    <span>Crear de usuarios</span>
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
                     <a class="nav-link collapsed" data-bs-target="#components-nav-autor" data-bs-toggle="collapse" href="#">
                         <i class="fa-solid fa-users"></i>
                         <span>Autores</span>
