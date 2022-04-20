@@ -33,29 +33,29 @@
                                 </td>
                                 <td>
                                     {{ u.nombres }}</li>
-                                </td>
-                                <td>
-                                    {{ u.apellidos }}
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" href="">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        Editar</a>
-                                    <a class="btn btn-outline-danger" href="">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                        Eliminar</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <!-- End Table with stripped rows -->
+                            </td>
+                            <td>
+                                {{ u.apellidos }}
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-success" href="">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Editar</a>
+                                <a class="btn btn-outline-danger" href="">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
 
-            </div>
         </div>
-    {% else %}
-        <h1>
-            No existen usuarios registrados
-        </h1>
-    {% endif %}
-{% endblock body %}
+    </div>
+{% else %}
+    <h1>
+        No existen usuarios registrados
+    </h1>
+{% endif %}{% endblock body %}{% block extraJS %}
+<script src="{% static 'biblioteca/assets/js/usuarios/index.js' %}"></script>{% endblock extraJS %}
