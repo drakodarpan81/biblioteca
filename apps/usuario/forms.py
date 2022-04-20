@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from apps.usuario.models import Usuario
 
+
 class FormularioUsuario(forms.ModelForm):
     """
     Formulario de registro de un usuario en la BD.
@@ -69,9 +70,16 @@ class FormularioUsuario(forms.ModelForm):
             - ValidatoinError -- Cuando las contraseñas no son iguales
         """
 
-        password1 = self.changed_data.get('password1')
-        password2 = self.changed_data.get('password2')
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
 
-        if password1 and password2 and password1 != password2:
+        if password1 != password2:
             return forms.ValidationError('Las constraseñas no coincide')
         return password2
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password1'])
+        if commit:
+            user.save()
+        return user
