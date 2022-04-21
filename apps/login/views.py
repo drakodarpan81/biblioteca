@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.core import serializers
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect, HttpResponse
 
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView, TemplateView
 
 from django.views.generic.edit import FormView
 
@@ -69,6 +70,10 @@ def login_request(request):
 def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     
+
+class InicioListadoView(TemplateView):
+    template_name = "usuarios/listar_usuarios.html"
+
 class UsuarioListView(LoginRequiredMixin, ListView):
     model = Usuario
     template_name = "usuarios/listar_usuarios.html"
@@ -79,22 +84,10 @@ class UsuarioListView(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         if is_ajax(request=request):
-            lista_usuarios = []
-            for usuario in self.get_queryset():
-                data_usuario = {}
-                data_usuario['id'] = usuario.id
-                data_usuario['nombres'] = usuario.nombres
-                data_usuario['apellidos'] = usuario.apellidos
-                data_usuario['email'] = usuario.email
-                data_usuario['username'] = usuario.username
-                data_usuario['usuario_activo'] = usuario.usuario_activo
-
-                lista_usuarios.append(data_usuario)
-
-            data = json.dumps(lista_usuarios)
-            return HttpResponse(data, 'application/json')
+            data = serializers.serialize('json', self.get_queryset(),)
+            return HttpResponse(data)
         else:
-            return render(request, self.template_name)
+            return redirect('usuarios:listar_usuarios')
 
 
 class RegistrarUsuario(LoginRequiredMixin, CreateView):
