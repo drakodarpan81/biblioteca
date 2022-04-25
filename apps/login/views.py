@@ -66,14 +66,6 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request=request, template_name='login.html', context={"login_form": form})
 
-
-def is_ajax(request):
-    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
-    
-
-class InicioListadoView(TemplateView):
-    template_name = "usuarios/listar_usuarios.html"
-
 class UsuarioListView(LoginRequiredMixin, ListView):
     model = Usuario
     template_name = "usuarios/listar_usuarios.html"
@@ -83,11 +75,11 @@ class UsuarioListView(LoginRequiredMixin, ListView):
         return self.model.objects.filter(usuario_activo=True)
 
     def get(self, request, *args, **kwargs):
-        if is_ajax(request=request):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             data = serializers.serialize('json', self.get_queryset(),)
             return HttpResponse(data)
         else:
-            return redirect('usuarios:listar_usuarios')
+            return render(request, self.template_name)
 
 
 class RegistrarUsuario(LoginRequiredMixin, CreateView):
