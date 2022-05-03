@@ -5,57 +5,59 @@
     Lista de usuarios
 {% endblock title %}
 
+{% block DataTable %}
+    <script src="{% static 'lib/DataTables-1.11.5/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'lib/DataTables-1.11.5/js/dataTables.bootstrap5.min.js' %}"></script>
+{% endblock DataTable %}
+
 {% block body %}
-    {% if usuarios %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Listado de usuarios</h5>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
 
-                <!-- Table with stripped rows -->
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Opción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for u in usuarios %}
-                            <tr>
-                                <td>
-                                    {{ u.id }}
-                                </td>
-                                <td>
-                                    {{ u.username }}
-                                </td>
-                                <td>
-                                    {{ u.nombres }}</li>
-                            </td>
-                            <td>
-                                {{ u.apellidos }}
-                            </td>
-                            <td>
-                                <a class="btn btn-outline-success" href="">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    Editar</a>
-                                <a class="btn btn-outline-danger" href="">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                    Eliminar</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <!-- End Table with stripped rows -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datatables</h5>
 
+                        <!-- Table with stripped rows -->
+                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                            <div class="dataTable-container">
+                                <table id="tabla_usuarios" class="table datatable dataTable-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">#</a>
+                                            </th>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">Username</a>
+                                            </th>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">Nombres</a>
+                                            </th>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">Apellidos</a>
+                                            </th>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">Email</a>
+                                            </th>
+                                            <th scope="col" data-sortable="">
+                                                <a href="#" class="dataTable-sorter">Opciones</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-{% else %}
-    <h1>
-        No existen usuarios registrados
-    </h1>
-{% endif %}{% endblock body %}{% block extraJS %}
-<script src="{% static 'biblioteca/assets/js/usuarios/index.js' %}"></script>{% endblock extraJS %}
+    </section>
+{% endblock body %}
+{% block extraJS %}
+    <script src="{% static 'biblioteca/assets/js/usuarios/index.js' %}"></script>
+{% endblock extraJS %}
