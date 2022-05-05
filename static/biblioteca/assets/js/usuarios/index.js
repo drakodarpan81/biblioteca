@@ -15,7 +15,7 @@ function listarUsuarios(){
                 fila += "<td>"+response[i]["fields"]["nombres"]+"</td>";
                 fila += "<td>"+response[i]["fields"]["apellidos"]+"</td>";
                 fila += "<td>"+response[i]["fields"]["email"]+"</td>";
-                fila += "<td><button> EDITAR</button><button> ELIMINAR </button></td>";
+                fila += '<td><button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i> EDITAR</button><button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> ELIMINAR </button></td>';
 
                 fila += "</tr>";
                 $("#tabla_usuarios tbody").append(fila);
@@ -275,3 +275,4 @@ function listarUsuarios(){
 $(document).ready(function(){
     listarUsuarios();
 });
+

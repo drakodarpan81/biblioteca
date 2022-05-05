@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, TemplateView
 
@@ -89,16 +89,27 @@ class RegistrarUsuario(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('usuarios:listar_usuarios')
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            nuevo_usuario = Usuario(
-                email=form.cleaned_data['email'],
-                username=form.cleaned_data['username'],
-                nombres=form.cleaned_data['nombres'],
-                apellidos=form.cleaned_data['apellidos']
-            )
-            nuevo_usuario.set_password(form.cleaned_data['password1'])
-            nuevo_usuario.save()
-            return redirect('usuarios:listar_usuarios')
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                nuevo_usuario = Usuario(
+                    email=form.cleaned_data['email'],
+                    username=form.cleaned_data['username'],
+                    nombres=form.cleaned_data['nombres'],
+                    apellidos=form.cleaned_data['apellidos']
+                )
+                nuevo_usuario.set_password(form.cleaned_data['password1'])
+                nuevo_usuario.save()
+                mensaje = f'{self.model.__name__} registrado correctamente'
+                error = 'No hay error!'
+                response = JsonResponse({'mensaje':mensaje, 'error':error})
+                response.status_code = 201
+                return response
+            else:
+                mensaje = f'{self.model.__name__} no se ha podido registrar'
+                error = form.errors
+                response = JsonResponse({'mensaje':mensaje, 'error':error})
+                response.status_code = 400
+                return response
         else:
-            return redirect(request, self.template_name, {'form': form})
+            return redirect('usuarios:listado_usuarios')

@@ -12,14 +12,14 @@
             <h5 class="card-title">Encabezado</h5>
 
             <!-- Multi Columns Form -->
-            <form method="POST" action="#" enctype="multipart/form-data" class="form-horizontal">
+            <form id="form_creacion" method="POST" action="{% url 'usuarios:registrar_usuarios' %}" enctype="multipart/form-data" class="form-horizontal">
                 {% csrf_token %}
 
                 {{ form.as_p }}
 
                 <div class="row">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <button type="button" class="btn btn-primary" onClick="registrar(listarUsuarios());">Crear</button>
                         <a href="{% url 'usuarios:listar_usuarios' %}" type="button" class="btn btn-outline-danger">Cancelar</a>
                     </div>
                 </div>
@@ -31,3 +31,7 @@
     </div>
 
 {% endblock body %}
+
+{% block extraJS %}
+    <script src="{% static 'biblioteca/assets/js/usuarios/custom.js' %}"></script>
+{% endblock extraJS %}
