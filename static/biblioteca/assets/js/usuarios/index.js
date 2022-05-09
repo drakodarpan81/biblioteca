@@ -6,6 +6,9 @@ function listarUsuarios(){
         type: 'get',
         dataType: 'json',
         success: function(response){
+            if($.fn.DataTable.isDataTable("#tabla_usuarios")){
+                $("#tabla_usuarios").DataTable().destroy();
+            }
             $("#tabla_usuarios tbody").html("");
 
             for(let i=0;i< response.length; i++){

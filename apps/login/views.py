@@ -112,4 +112,4 @@ class RegistrarUsuario(LoginRequiredMixin, CreateView):
                 response.status_code = 400
                 return response
         else:
-            return redirect('usuarios:listado_usuarios')
+            return redirect('usuarios:listar_usuarios')

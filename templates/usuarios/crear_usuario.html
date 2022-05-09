@@ -5,6 +5,11 @@
     Creación de usuarios
 {% endblock title %}
 
+{% block DataTable %}
+    <script src="{% static 'lib/DataTables-1.11.5/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'lib/DataTables-1.11.5/js/dataTables.bootstrap5.min.js' %}"></script>
+{% endblock DataTable %}    
+
 {% block body %}
 
     <div class="card">
@@ -19,7 +24,7 @@
 
                 <div class="row">
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary" onClick="registrar(listarUsuarios());">Crear</button>
+                        <button type="button" class="btn btn-primary" onClick="registrar();">Crear</button>
                         <a href="{% url 'usuarios:listar_usuarios' %}" type="button" class="btn btn-outline-danger">Cancelar</a>
                     </div>
                 </div>
@@ -30,8 +35,13 @@
         </div>
     </div>
 
+    <script type=text/javascript>
+        var success_url = "{% url 'usuarios:listar_usuarios' %}";
+    </script>
+
 {% endblock body %}
 
 {% block extraJS %}
+    <script src="{% static 'biblioteca/assets/js/usuarios/index.js' %}"></script>
     <script src="{% static 'biblioteca/assets/js/usuarios/custom.js' %}"></script>
 {% endblock extraJS %}
