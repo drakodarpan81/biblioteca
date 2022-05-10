@@ -8,9 +8,14 @@ function registrar(){
         url: $('#form_creacion').attr('action'),
         type: $('#form_creacion').attr('method'),
         success: function(response){
-            window.location.href = success_url;
+            notificacionSuccess(response.mensaje);
+            setTimeout(function() {
+                redirigirPagina(success_url);
+            }, 2000);
         },
         error: function(error){
+            botonActivo();
+            notificacionError(error.responseJSON.mensaje);
             mostrarErroresCreacion(error);
         }
     });
@@ -33,4 +38,24 @@ function mostrarErroresCreacion(errores){
     }
 
     $("#errores").append(error);
+}
+
+function notificacionError(mensaje){
+    Swal.fire({
+        title: 'Error',
+        text: mensaje,
+        icon: 'error'
+    })
+}
+
+function notificacionSuccess(mensaje){
+    Swal.fire({
+        title: 'Buen trabajo',
+        text: mensaje,
+        icon: 'success'
+    })
+}
+
+function redirigirPagina(url){
+    window.location.href = url;
 }
