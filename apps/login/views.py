@@ -100,8 +100,10 @@ class RegistrarUsuario(LoginRequiredMixin, CreateView):
                 )
                 nuevo_usuario.set_password(form.cleaned_data['password1'])
                 nuevo_usuario.save()
+                codigo = Usuario.objects.latest('id')
                 mensaje = f'{self.model.__name__} registrado correctamente'
                 error = 'No hay error!'
+                print('Usuario dado de alta con exito:' + str(codigo))   
                 response = JsonResponse({'mensaje':mensaje, 'error':error})
                 response.status_code = 201
                 return response
